@@ -1,0 +1,7 @@
+fos_user:
+  db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+  firewall_name: main
+  user_class: EntityBundle\Entity\User
+  from_email:
+    address: maupo3311@mail.ru
+    sender_name: New_project

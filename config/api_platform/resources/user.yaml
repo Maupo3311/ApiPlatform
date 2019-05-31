@@ -1,0 +1,99 @@
+EntityBundle\Entity\User:
+  collectionOperations:
+    get: ~
+    post:
+      method: 'POST'
+      access_control: 'is_granted("ROLE_ADMIN")'
+      access_control_message: 'Only admins can create users.'
+  itemOperations:
+    get:
+      method: 'GET'
+      access_control: 'is_granted("ROLE_USER") and object.owner == user'
+      access_control_message: 'Sorry, but you are not the book owner.'
+    me:
+      route_name: 'get_me'
+      swagger_context:
+        parameters:
+           - required: false
+        summary: "Retrieves your data"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    basket:
+      route_name: 'get_basket_items_by_user'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            responses:
+              200:
+                description: "Retrieves basket items of the specified user"
+        summary: "Retrieves basket items of the specified user"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    comments:
+      route_name: 'get_comments_by_user'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            responses:
+              200:
+                description: "Retrieves comments of the specified user"
+        summary: "Retrieves comments of the specified user"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    login:
+      route_name: 'authentication_token'
+      swagger_context:
+        parameters:
+          - name: data
+            in: body
+            required: true
+            schema:
+              type: object
+              properties:
+                email: {type: string}
+                password: {type: string}
+            responses:
+              200:
+                description: "Retrieves access token by username and password, or by email and password"
+        summary: "Retrieves access token"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    delete:
+      route_name: 'delete_user'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            responses:
+              200:
+                description: "Success response"
+        summary: "Remove user"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    put:
+      route_name: 'put_user'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+          - name: firstName
+            in: query
+            required: false
+          - name: lastName
+            in: query
+            required: false
+          - name: username
+            in: query
+            required: false
+            responses:
+              200:
+                description: "Success response"
+        summary: "Change user"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]

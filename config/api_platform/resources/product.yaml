@@ -1,0 +1,107 @@
+EntityBundle\Entity\Product:
+  collectionOperations: ~
+  itemOperations:
+    get:
+      method: 'GET'
+      normalization_context:
+        groups: ['product']
+    shop:
+      route_name: 'get_shop_by_product'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "Shop this product"
+          404:
+            description: "Resource not found"
+        summary: "Retrieves shop of the specified product"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    category:
+      route_name: 'get_category_by_product'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "Category this product"
+          404:
+            description: "Resource not found"
+        summary: "Retrieves category of the specified product"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    comments:
+      route_name: 'get_comments_by_product'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "Comments this product"
+          404:
+            description: "Resource not found"
+        summary: "Retrieves comments of the specified product"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    delete:
+      route_name: 'delete_product'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "Success response"
+          404:
+            description: "Resource not found"
+        summary: "Remove product"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+    put:
+      route_name: 'put_product'
+      swagger_context:
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+          - name: title
+            in: query
+            required: false
+            type: string
+          - name: description
+            in: query
+            required: false
+            type: string
+          - name: price
+            in: query
+            required: false
+            type: int
+          - name: rating
+            in: query
+            required: false
+            type: float
+          - name: number
+            in: query
+            required: false
+            type: int
+        responses:
+          200:
+            description: "Success response"
+          404:
+            description: "Resource not found"
+        summary: "Put product"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]

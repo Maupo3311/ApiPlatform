@@ -1,0 +1,7 @@
+resources:
+#  EntityBundle\Entity\Product: ~
+  EntityBundle\Entity\Category: ~
+  EntityBundle\Entity\Feedback: ~
+  EntityBundle\Entity\Comment: ~
+  EntityBundle\Entity\Shop: ~
+  EntityBundle\Entity\Basket: ~
