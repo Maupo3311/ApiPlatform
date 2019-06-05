@@ -2,6 +2,7 @@
 
 namespace App\Controller\api_platform;
 
+use EntityBundle\Entity\Category;
 use EntityBundle\Entity\Product;
 use EntityBundle\Entity\User;
 use EntityBundle\Repository\ProductRepository;
@@ -63,5 +64,15 @@ class BaseController extends Controller
         $userRepository = $this->getDoctrine()->getRepository(User::class);
 
         return $userRepository->find($id);
+    }
+
+    /**
+     * @param int $id
+     * @return object|null
+     */
+    protected function getCategoryById(int $id) {
+        $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
+
+        return $categoryRepository->find($id);
     }
 }

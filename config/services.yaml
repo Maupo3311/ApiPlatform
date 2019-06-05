@@ -4,42 +4,60 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: project
-    database_user: stager
-    database_password: password
-    mailer_encryption: ssl
-    mailer_auth_mode: login
-    mailer_transport: smtp
-    mailer_host: smtp.mail.ru
-    mailer_user: maupo3311@mail.ru
-    mailer_port: 465
-    mailer_password: 19733791qqq
+  locale: 'en'
+  database_host: 127.0.0.1
+  database_port: null
+  database_name: project
+  database_user: stager
+  database_password: password
+  mailer_encryption: ssl
+  mailer_auth_mode: login
+  mailer_transport: smtp
+  mailer_host: smtp.mail.ru
+  mailer_user: maupo3311@mail.ru
+  mailer_port: 465
+  mailer_password: 19733791qqq
+  rabbit_host:     localhost
+  rabbit_port:     5672
+  rabbit_user:     admin
+  rabbit_password: password1234
+  rabbit_vhost:    my_project
 
 services:
-    app.api_helper:
-        class: App\Services\ApiHelperService
-        arguments: ["@doctrine.orm.default_entity_manager"]
-        public: true
+  app.test_command:
+    class: App\Command\TestCommand
+    arguments: ['@app.my_producer']
+    public: true
 
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+  app.my_producer:
+    class: App\Rabbit\Producers\MyProducer
+    public: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+  app.my_consumer:
+    class: App\Rabbit\Consumers\MyConsumer
+    public: true
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
+  app.api_helper:
+    class: App\Services\ApiHelperService
+    arguments: ["@doctrine.orm.default_entity_manager"]
+    public: true
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones

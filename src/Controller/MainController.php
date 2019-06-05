@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MainController extends Controller
 {
-
     /**
      * @Route("/")
      * @return RedirectResponse
