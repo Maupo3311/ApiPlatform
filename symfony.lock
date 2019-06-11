@@ -16,6 +16,15 @@
             "src/Entity/.gitignore"
         ]
     },
+    "api-platform/schema-generator": {
+        "version": "v2.1.0"
+    },
+    "composer/semver": {
+        "version": "1.5.0"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.3.3"
+    },
     "curl/curl": {
         "version": "2.2.0"
     },
@@ -110,6 +119,9 @@
             "config/packages/dev/easy_log_handler.yaml"
         ]
     },
+    "easyrdf/easyrdf": {
+        "version": "0.9.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.8"
     },
@@ -118,6 +130,18 @@
     },
     "fig/link-util": {
         "version": "1.0.0"
+    },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
+        },
+        "files": [
+            ".php_cs.dist"
+        ]
     },
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
@@ -182,6 +206,9 @@
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
+    "league/html-to-markdown": {
+        "version": "4.8.1"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
         "recipe": {
@@ -199,6 +226,9 @@
     },
     "my-vendor/entity-bundle": {
         "version": "dev-master"
+    },
+    "myclabs/php-enum": {
+        "version": "1.7.1"
     },
     "namshi/jose": {
         "version": "7.2.3"
@@ -235,6 +265,9 @@
             "version": "1.12",
             "ref": "ce3ca2e4577270c4f518539aa6b9e878998fcfef"
         }
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"

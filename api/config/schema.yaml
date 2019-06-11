@@ -1,0 +1,78 @@
+types:
+  Shop:
+    properties:
+      name: {range: "String"}
+      description: {range: "Text"}
+      phoneNumber: {range: "String"}
+      lat: {range: "String"}
+      lon: {range: "String"}
+      categories: {range: "Category", cardinality: "(0..*)"}
+      images: {range: "ShopImage", cardinality: "(0..*)"}
+  Category:
+    properties:
+      name: ~
+      active: {range: "Bool"}
+      products: {range: "Product", cardinality: "(0..*)"}
+      shop: {range: "Shop"}
+  Product:
+    properties:
+      title: ~
+      price: {range: "Integer"}
+      description: {range: "Text"}
+      category: {range: "Category"}
+      active: {range: "Bool"}
+      images: {range: "ProductImage", cardinality: "(0..*)"}
+      basketItems: {range: "BasketItem", cardinality: "(0..*)"}
+      number: {range: "Integer"}
+      comments: {range: "Comment", cardinality: "(0..*)"}
+      rating: {range: "Float"}
+  Basket:
+    properties:
+      user: {range: "User"}
+      basketProduct: {range: "Product"}
+      numberOfProduct: {range: "Integer"}
+  Comment:
+    properties:
+      user: {range: "User"}
+      product: {range: "Product"}
+      message: {range: "Text"}
+      createdAt: {range: "DateTime"}
+      images: {range: "CommentImage", cardinality: "(0..*)"}
+  Feedback:
+    properties:
+      user: {range: "User"}
+      message: {range: "Text"}
+      created: {range: "DateTime"}
+      images: {range: "FeedbackImage", cardinality: "(0..*)"}
+  User:
+    parent: "\\FOS\\UserBundle\\Model\\User"
+    properties:
+      vkontakte_id: ~
+      vkontakte_access_token: ~
+      yandex_id: ~
+      yandex_access_token: ~
+      github_id: ~
+      github_access_token: ~
+      customerId: ~
+      firstName: ~
+      lastName: ~
+      feedbacks: {range: "Feedback", cardinality: "(0..*)"}
+      basketItems: {range: "Basket", cardinality: "(0..*)"}
+      comments: {range: "Comment", cardinality: "(0..*)"}
+  ShopImage:
+    parent: "\\EntityBundle\\Entity\\Image\\AbstractImage"
+    properties:
+      shop: {range: "Shop"}
+  ProductImage:
+    parent: "\\EntityBundle\\Entity\\Image\\AbstractImage"
+    properties:
+      product: {range: "Product"}
+  CommentImage:
+    parent: "\\EntityBundle\\Entity\\Image\\AbstractImage"
+    properties:
+      comment: {range: "Comment"}
+  FeedbackImage:
+    parent: "\\EntityBundle\\Entity\\Image\\AbstractImage"
+    properties:
+      feedback: {range: "Feedback"}
+  OfferItemCondition: ~
